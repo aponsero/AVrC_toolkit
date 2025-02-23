@@ -1,0 +1,38 @@
+# .github/ISSUE_TEMPLATE/question.yml
+name: Question
+description: Ask a question about using the AVrC toolkit
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in the AVrC toolkit! Please fill out this form to ask your question.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know about the AVrC toolkit?
+      placeholder: I would like to understand...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Please provide any relevant context about your question (what you're trying to achieve, what you've tried so far, etc.)
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version of AVrC toolkit are you using?
+      placeholder: e.g., v0.1.0
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Linux
+        - macOS
+        - Windows
+    validations:
+      required: true

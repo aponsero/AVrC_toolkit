@@ -1,10 +1,22 @@
 # AVrC Toolkit
 
+[![Python package](https://github.com/aponsero/AVrC_toolkit/actions/workflows/python-package.yml/badge.svg)](https://github.com/aponsero/AVrC_toolkit/actions/workflows/python-package.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.11426065.svg)](https://doi.org/10.5281/zenodo.11426065)
+
 A Python package for downloading and filtering sequences from the Aggregated Gut Viral Catalogue (AVrC). This toolkit provides command-line utilities to:
 - Download complete or subset data from AVrC
 - Filter sequences based on quality metrics
 - Select sequences based on taxonomy and host information
 - Extract specific viral groups
+
+## Data Source
+
+The AVrC dataset is available through Zenodo: [https://doi.org/10.5281/zenodo.11426065](https://doi.org/10.5281/zenodo.11426065)
+
+Available subsets:
+- Complete dataset: All representative sequences with metadata
+- High-quality subset: Sequences meeting strict quality criteria
+- Phage subset: Bacteriophage sequences
 
 ## Installation
 
@@ -99,9 +111,15 @@ When using `--output both`, the following files are generated:
 
 ## Citation
 
-If you use this toolkit in your research, please cite:
+If you use this toolkit or the AVrC dataset in your research, please cite:
+
 ```bibtex
-[Citation will be added upon publication]
+@dataset{avrc_dataset,
+    doi = {10.5281/zenodo.11426065},
+    url = {https://doi.org/10.5281/zenodo.11426065},
+    title = {Aggregated Gut Viral Catalogue (AVrC)},
+    year = {2024}
+}
 ```
 
 ## Contributing
