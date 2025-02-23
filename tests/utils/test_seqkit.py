@@ -2,22 +2,28 @@
 import subprocess
 import pytest
 from pathlib import Path
-from avrc.utils.seqkit import check_seqkit_installed, count_sequences, filter_sequences
+from avrc.utils.seqkit import verify_seqkit, count_sequences, filter_sequences
 
-def test_check_seqkit_installed(mocker):
-    """Test seqkit installation check."""
-    # Mock successful seqkit version check
+def test_verify_seqkit_success(mocker):
+    """Test successful seqkit verification."""
+    mock_which = mocker.patch('shutil.which')
+    mock_which.return_value = '/usr/local/bin/seqkit'
+    
     mock_run = mocker.patch('subprocess.run')
     mock_run.return_value.returncode = 0
     
-    assert check_seqkit_installed() is True
+    is_valid, msg = verify_seqkit()
+    assert is_valid is True
+    assert '/usr/local/bin/seqkit' in msg
+
+def test_verify_seqkit_not_found(mocker):
+    """Test seqkit not found case."""
+    mock_which = mocker.patch('shutil.which')
+    mock_which.return_value = None
     
-    # Verify subprocess.run was called with correct arguments
-    mock_run.assert_called_once_with(
-        ['seqkit', '--version'],
-        capture_output=True,
-        check=True
-    )
+    is_valid, msg = verify_seqkit()
+    assert is_valid is False
+    assert 'not found in PATH' in msg
 
 def test_count_sequences(mocker, tmp_path):
     """Test sequence counting."""
@@ -70,7 +76,7 @@ def test_filter_sequences(mocker, tmp_path):
         '-o', str(output_file)
     ], check=True)
 
-def test_count_sequences_error(mocker, tmp_path):
+def test_count_sequences_error(mocker):
     """Test error handling in count_sequences."""
     # Mock subprocess.run to raise an error
     mock_run = mocker.patch('subprocess.run')
@@ -78,9 +84,9 @@ def test_count_sequences_error(mocker, tmp_path):
     
     # Test error handling
     with pytest.raises(RuntimeError, match="Error running seqkit"):
-        count_sequences(tmp_path / "test.fasta.gz")
+        count_sequences("test.fasta")
 
-def test_filter_sequences_error(mocker, tmp_path):
+def test_filter_sequences_error(mocker):
     """Test error handling in filter_sequences."""
     # Mock subprocess.run to raise an error
     mock_run = mocker.patch('subprocess.run')
@@ -88,8 +94,4 @@ def test_filter_sequences_error(mocker, tmp_path):
     
     # Test error handling
     with pytest.raises(RuntimeError, match="Error filtering sequences"):
-        filter_sequences(
-            tmp_path / "input.fasta.gz",
-            tmp_path / "output.fasta.gz",
-            tmp_path / "ids.txt"
-        )
+        filter_sequences("input.fasta", "output.fasta", "ids.txt")
