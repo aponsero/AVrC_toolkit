@@ -22,7 +22,7 @@ The AVrC dataset is available through Zenodo: https://doi.org/10.5281/zenodo.114
 - [**Complete Documentation**](https://github.com/aponsero/AVrC_toolkit/wiki) - Comprehensive wiki with tutorials and reference guides
 - [**Installation Guide**](https://github.com/aponsero/AVrC_toolkit/wiki/Installation-Guide) - Detailed setup instructions
 - [**Command Reference**](https://github.com/aponsero/AVrC_toolkit/wiki/Command-Reference) - Complete command documentation
-- [**Tutorials**](https://github.com/aponsero/AVrC_toolkit/wiki/Tutorials-and-Examples) - Step-by-step guides and examples
+- [**Tutorials**](https://github.com/aponsero/AVrC_toolkit/wiki/Tutorials) - Step-by-step guides and examples
 
 ## Quick Start
 
